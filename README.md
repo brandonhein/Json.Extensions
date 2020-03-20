@@ -2,6 +2,11 @@
 
 Awesome Extension Library to help map `JObject`/`JArray` to JPaths.  As well as allowing you to set values using said JPath
 
+- [Json to JPaths with Values](https://github.com/brandonhein/Json.Extensions/blob/master/README.md#json-to-jpaths)
+- [Json to JPaths](https://github.com/brandonhein/Json.Extensions/blob/master/README.md#json-paths-alone)
+- [JPaths with Values to Json](https://github.com/brandonhein/Json.Extensions/blob/master/README.md#paths-with-values-to-json)
+- [JPaths to Json Shell](https://github.com/brandonhein/Json.Extensions/blob/master/README.md#paths-to-json-shell)
+
 ---
 
 ## Json to JPaths
