@@ -59,7 +59,65 @@ namespace Json.Extensions
                 stringQuery = stringQuery.Replace($"[{segementToRemove}]", "");
 
                 token = obj.SelectToken(stringQuery);
+                if (token != null && token.Type == JTokenType.Array)
+                {
+                    var array = (JArray)token;
+                    var child = array.Children().FirstOrDefault();
+                    if (child.Type == JTokenType.Object)
+                    {
+                        var blankChildToAdd = new JObject();
+                        var childObj = (JObject)child;
+                        var props = childObj.Properties();
+                        foreach (var prop in props)
+                        {
+                            blankChildToAdd.Add(prop.Name, new JObject());
+                        }
+
+                        array.Add(blankChildToAdd);
+                    }
+
+                    SetValueByPath(obj, path, value);
+                }
+                else
+                {
+                    SpecialArraySetting(obj, path, value);
+                }
+            }
+        }
+
+        private static void SpecialArraySetting(this JContainer obj, string path, object value)
+        {
+            var items = new string[] { ".", "[", "]" };
+            var segments = path.Split(items, StringSplitOptions.RemoveEmptyEntries);
+            var lastSegment = segments.LastOrDefault();
+
+            var stringQuery = "$";
+
+            var querySegements = segments.Count() > 1 ? segments.Take(segments.Count() - 1).ToArray() : segments;
+            foreach (var segment in querySegements)
+            {
+                stringQuery = string.Concat(stringQuery, Regex.IsMatch(segment, @"^\d") ? $"[{segment}]" : $"['{segment}']");
+            }
+
+            var token = obj.SelectToken(stringQuery);
+            if (token != null)
+            {
                 if (token.Type == JTokenType.Array)
+                {
+                    ((JArray)token).Add(new JValue(value));
+                }
+                else
+                {
+                    token[lastSegment] = new JValue(value);
+                }
+            }
+            else
+            {
+                var segementToRemove = segments.Reverse().Skip(1).FirstOrDefault();
+                stringQuery = stringQuery.ReplaceTheLast($"[{segementToRemove}]", "");
+
+                token = obj.SelectToken(stringQuery);
+                if (token != null && token.Type == JTokenType.Array)
                 {
                     var array = (JArray)token;
                     var child = array.Children().FirstOrDefault();

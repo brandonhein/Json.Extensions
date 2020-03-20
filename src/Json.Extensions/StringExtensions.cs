@@ -36,5 +36,18 @@ namespace Json.Extensions
                 return "";
             }
         }
+
+        internal static string ReplaceTheLast(this string source, string oldValue, string newValue)
+        {
+            var place = source.LastIndexOf(oldValue);
+
+            if (place == -1)
+            {
+                return source;
+            }
+
+            var result = source.Remove(place, oldValue.Length).Insert(place, newValue);
+            return result;
+        }
     }
 }

@@ -88,7 +88,9 @@ namespace Json.Extensions
                 {
                     var array = (JArray)container;
                     var prop = new JObject();
-                    prop.Add(arrayName, new JArray());
+                    var arrayToAdd = new JArray();
+                    //arrayToAdd.Add(new JObject());
+                    prop.Add(arrayName, arrayToAdd);
 
                     if (array.Children().Any())
                     {
@@ -109,7 +111,7 @@ namespace Json.Extensions
                             }
                             else
                             {
-                                childObject.Add(arrayName, new JArray());
+                                childObject.Add(arrayName, arrayToAdd);
                                 return (JContainer)childObject.SelectToken(arrayName);
                             }
                         }

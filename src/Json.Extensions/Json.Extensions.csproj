@@ -4,6 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Json.Extensions</AssemblyName>
     <RootNamespace>Json.Extensions</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>brandonhein</Authors>
+    <Company>brandonhein</Company>
+    <PackageProjectUrl>https://github.com/brandonhein/Json.Extensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/brandonhein/Json.Extensions</RepositoryUrl>
+    <PackageTags>Hein Json JPath</PackageTags>
+    <Description>Helper Library to help create JPaths from Json. And also set values via a JPath in a json.</Description>
   </PropertyGroup>
 
   <ItemGroup>
