@@ -24,6 +24,7 @@ namespace Json.Extension.Sample.WebApi
             services.AddMvc();
             services.AddMvc(options =>
             {
+                options.EnableEndpointRouting = false;
                 options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
                 options.InputFormatters.Add(new RawRequestBodyFormatter());
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
